@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
                     JSONArray all_results = jsonObject.getJSONArray("results");
                     Log.i(TAG, "worked: " + all_results.toString());
                    good_movies = movies.createMovies(all_results);
+                   Log.i(TAG, "yy"+ good_movies);
+
 
                 } catch (JSONException e) {
                     Log.e(TAG, "json part isn't working", e);
