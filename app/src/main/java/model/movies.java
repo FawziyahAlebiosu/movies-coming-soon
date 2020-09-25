@@ -19,6 +19,7 @@ public class movies {
         this.title_of_movie = jsonObject.getString("title");
         this.link_to_movie_image = jsonObject.getString("poster_path");
         this.description = jsonObject.getString("overview");
+        this.numVotes = jsonObject.getString("vote_average");
     }
 
     //create a method that will create list of datatype movies
