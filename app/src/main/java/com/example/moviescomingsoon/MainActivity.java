@@ -12,6 +12,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
+import model.movies;
 import okhttp3.Headers;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String movies_now_playing_url = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
     public static String TAG = "main";
+    public static List<movies> good_movies;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         AsyncHttpClient clientObject = new AsyncHttpClient();
 
-        //use client to make a get request
+        //use client to make a get request and save the array we're given in return
 
         clientObject.get(movies_now_playing_url, new JsonHttpResponseHandler() {
             @Override
@@ -39,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
                     JSONArray all_results = jsonObject.getJSONArray("results");
                     Log.i(TAG, "worked: " + all_results.toString());
+                   good_movies = movies.createMovies(all_results);
+
                 } catch (JSONException e) {
                     Log.e(TAG, "json part isn't working", e);
 
@@ -52,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "no");
             }
         });
+        //next,we want to parse the result array given to us!
 
     }
 }
