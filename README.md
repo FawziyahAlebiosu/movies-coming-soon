@@ -21,7 +21,7 @@ movies-coming-soon is an app that allows users to browse movies from the [The Mo
 
 ### App Walkthough GIF
 
-<img src="https://i.imgur.com/jmNh5eR.mp4" width=250><br>
+<img src="https://i.imgur.com/cHdWHSV.gif" width=200><br>
 
 ### Notes
 Recylerview was definitely a bit odd to get used to. I loved working with the Movie DB API, and parsng the JSON!!
