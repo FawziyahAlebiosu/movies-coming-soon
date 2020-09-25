@@ -23,7 +23,7 @@ public class movieAdapter extends RecyclerView.Adapter<movieAdapter.ViewHolder> 
     //we need context so we can inflate the view, aka where the adpater is being cotnruscted from
 
     Context context;
-    List<model.movies> movies;
+    List<movies> movies;
 
     public movieAdapter(Context context, List<movies> movies){
         this.context = context;
@@ -66,7 +66,7 @@ public class movieAdapter extends RecyclerView.Adapter<movieAdapter.ViewHolder> 
 
         }
 
-        public void bind(model.movies current_movie) {
+        public void bind(movies current_movie) {
             titleMovie.setText(current_movie.getTitle_of_movie());
             descriptionMovie.setText(current_movie.getDescription());
             //populate images
