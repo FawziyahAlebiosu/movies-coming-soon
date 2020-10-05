@@ -1,17 +1,25 @@
 package adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcel;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.moviescomingsoon.MainActivity;
 import com.example.moviescomingsoon.R;
+import com.example.moviescomingsoon.movieDetailsActivity;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -24,6 +32,7 @@ public class movieAdapter extends RecyclerView.Adapter<movieAdapter.ViewHolder> 
 
     Context context;
     List<movies> movies;
+
 
     public movieAdapter(Context context, List<movies> movies){
         this.context = context;
@@ -57,20 +66,39 @@ public class movieAdapter extends RecyclerView.Adapter<movieAdapter.ViewHolder> 
         TextView titleMovie;
         TextView descriptionMovie;
         ImageView posterImage;
+        RelativeLayout row;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             titleMovie = itemView.findViewById(R.id.titleMovie);
             descriptionMovie = itemView.findViewById(R.id.movieDescription);
             posterImage = itemView.findViewById(R.id.posterMovie);
+            row = itemView.findViewById(R.id.individualRow);
 
         }
 
-        public void bind(movies current_movie) {
+        public void bind(final movies current_movie) {
+
             titleMovie.setText(current_movie.getTitle_of_movie());
             descriptionMovie.setText(current_movie.getDescription());
             //populate images
             Glide.with(context).load(current_movie.getLink_to_movie_image()).into(posterImage);
+            row.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //we want listener to be entire row, not just the title- done
+
+                    //create an intent, and grab description, and go to anew activity
+                    Intent intent = new Intent(context, movieDetailsActivity.class);
+
+
+
+                    intent.putExtra("movie_object", Parcels.wrap(current_movie));
+
+                    context.startActivity(intent);
+                   // MainActivity.this.startActivityForResult(intent, 100);
+                }
+            });
         }
     }
 
