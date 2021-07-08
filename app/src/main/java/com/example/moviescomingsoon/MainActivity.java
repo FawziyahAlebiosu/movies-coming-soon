@@ -65,10 +65,12 @@ public class MainActivity extends AppCompatActivity {
                 try {
 
                     JSONArray all_results = jsonObject.getJSONArray("results");
-                    Log.i(TAG, "worked: " + all_results.toString());
-                   good_movies.addAll(movies.createMovies(all_results));
+
+                    //next,we want to parse the result array given to us
+
+                    good_movies.addAll(movies.createMovies(all_results));
                    adapter.notifyDataSetChanged();
-                   Log.i(TAG, "yy"+ good_movies);
+
 
 
                 } catch (JSONException e) {
@@ -81,10 +83,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.d(TAG, "no");
+                Log.d(TAG, "failed");
             }
         });
-        //next,we want to parse the result array given to us!
 
     }
 

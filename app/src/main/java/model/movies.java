@@ -3,23 +3,41 @@ package model;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Parcel
 public class movies {
-    private  String title_of_movie;
-    private  String link_to_movie_image;
-    private String description;
 
-    public  String numVotes;
+    private String title_of_movie;
+    private  String link_to_movie_image;
+    private  String description;
+
+    private int  movieid;
+
+    public int getMovieid() {
+        return movieid;
+    }
+
+    public void setMovieid(int movieid) {
+        this.movieid = movieid;
+    }
+
+    public double numVotes;
+    //necessary for parceler
+
+    public movies(){
+
+    }
 
     public movies(JSONObject jsonObject) throws JSONException {
         //use the constructor to parse json into string variables
         this.title_of_movie = jsonObject.getString("title");
         this.link_to_movie_image = jsonObject.getString("poster_path");
         this.description = jsonObject.getString("overview");
-        this.numVotes = jsonObject.getString("vote_average");
+        this.numVotes = jsonObject.getDouble("vote_average");
+        this.movieid = jsonObject.getInt("id");
     }
 
     //create a method that will create list of datatype movies
@@ -32,7 +50,7 @@ public class movies {
         return good_movies;
     }
 
-    public String getTitle_of_movie() {
+    public  String getTitle_of_movie() {
         return title_of_movie;
     }
 
@@ -53,7 +71,7 @@ public class movies {
       this.link_to_movie_image = link_to_movie_image;
     }
 
-    public String getDescription() {
+    public  String getDescription() {
         return description;
     }
 
@@ -61,11 +79,12 @@ public class movies {
         this.description = description;
     }
 
-    public String getNumVotes() {
+    public double getNumVotes() {
+
         return numVotes;
     }
 
-    public void setNumVotes(String numVotes) {
+    public void setNumVotes(double numVotes) {
          this.numVotes= numVotes;
     }
     /*
@@ -88,5 +107,11 @@ public class movies {
     currently playing ?
 
     later on: vote of movie
+    //assignment two assumptions:
+    create activity to show the details of move
+    might be recyler view but idts, it's not necessary
+    create intent to pass link of video, description and title
+    call some api to populate rating widget?
+
      */
 }
